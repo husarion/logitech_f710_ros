@@ -1,0 +1,10 @@
+<launch>
+
+    <node name="f710_joy_node" pkg="joy" type="joy_node">
+        <param name="autorepeat_rate" type="double" value="10"/>
+    </node>
+
+    <node name="f710_teleop_joy_node" pkg="logitech_f710_joy_ros" type="f710_teleop_joy" output="screen">
+    </node>
+
+</launch>

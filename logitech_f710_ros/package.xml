@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>logitech_f710_joy_ros</name>
+  <version>0.0.0</version>
+  <description>The logitech_f710_joy_ros package</description>
+
+  <author email="adam.krawczyk@husarion.com">Adam Krawczyk</author>
+  <maintainer email="krzysztof.wojciechowski@husarion.com">Krzysztof Wojciechowski</maintainer>
+  
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>joy</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_export_depend>joy</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <exec_depend>joy</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+
+</package>

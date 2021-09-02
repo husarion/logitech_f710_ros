@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  panther_driver:
+    image: husarion/panther-driver
+    container_name: panther_driver
+    network_mode: host
+    restart: on-failure
+    environment:
+      - ROS_MASTER_URI=http://127.0.0.1:11311
+    command: roslaunch panther_driver driver.launch
+
+  velocity_manager:
+    image: husarion:velocity-manager
+    container_name: velocity_manager
+    network_mode: host
+    restart: on-failure
+    environment:
+      - ROS_MASTER_URI=http://127.0.0.1:11311
+    command: rosrun velocity_manager velocity_manager_node
+
+  logitech-f710-joy-ros:
+    build:
+      context: .
+    container_name: logitech-f710-joy-ros
+    network_mode: host
+    restart: on-failure
+    environment:
+      - ROS_MASTER_URI=http://localhost:11311
+    device:
+      - /dev/input/js0
+    command: rosrun logitech_f710_joy_ros f710_teleop_joy
