@@ -25,6 +25,8 @@ If neither `RB` nor `RT` are pressed robot operates in *normal* driving mode.
 
 To drive robot use sticks.
 
+By default linear `X` and `Y` are held by right stick. Angular `Z` is controlled with left stick.
+
 ## Examples
 
 You can run examples with following commands:
