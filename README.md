@@ -13,9 +13,7 @@ If the output is:
 
 See `ls /dev/input | grep js` and find your joy number. If it differs apply changes in *docker-compose.yaml* and launch file.
 
-## Move robot:
-
-This node will publish values on `cmd_vel` topic with message *geometry_msgs/Twist*.
+## Button mapping
 
 |  Button  |      Function      |
 |:--------:|:------------------:|
@@ -25,10 +23,7 @@ This node will publish values on `cmd_vel` topic with message *geometry_msgs/Twi
 
 If neither `RB` nor `RT` are pressed robot operates in *normal* driving mode.
 
-By default joy stick's axes are mapped as follows:
-- **right stick** - forward / backward: `cmd_vel` linear `x`
-- **right stick** - left / right: `cmd_vel` linear `y`
-- **left stick** - left / right: `cmd_vel` angular `z`
+To drive robot use sticks.
 
 ## Examples
 
@@ -38,3 +33,40 @@ You can run examples with following commands:
 cd examples/panther_f710
 docker-compose up
 ```
+
+---
+# ROS node API
+
+ROS node is translating `/joy` topic to `/cmd_vel` topic.
+
+
+### Publish
+
+- `/cmd_vel` *(geometry_msgs/Twist)*
+
+### Subscribe
+
+- `/joy` *(sensor_msgs/Joy)*
+
+### Parameters
+
+Following parameters change joystick axes mapped to given robot axes of freedom. For more information about parameter values refer to joy package [wiki page](http://wiki.ros.org/joy#Logitech_Wireless_Gamepad_F710_.28DirectInput_Mode.29).
+
+- `~axis_linear_x` *(int, default: 1)* 
+- `~axis_linear_y` *(int, default: 2)*
+- `~axis_angular_z` *(int, default: 0)*
+
+Robot can be operated at 3 scales of speed depending on pressed buttons. Values in those parameters are m/s for linear movement and rad/s for angular movement.
+
+- `~slow_linear_x` *(double, default: 0.1)*
+- `~slow_linear_y` *(double, default: 0.1)*
+- `~slow_angular_z` *(double, default: 0.1)*
+
+- `~normal_linear_x` *(double, default: 0.5)*
+- `~normal_linear_y` *(double, default: 0.5)*
+- `~normal_angular_z` *(double, default: 0.5)*
+
+- `~fast_linear_x` *(double, default: 2.0)*
+- `~fast_linear_y` *(double, default: 2.0)*
+- `~fast_angular_z` *(double, default: 2.0)*
+
