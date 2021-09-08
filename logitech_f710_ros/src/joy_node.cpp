@@ -14,7 +14,7 @@ private:
 
     ros::NodeHandle nh_;
 
-    int linear_x_{}, linear_y_{}, angular_z_{};
+    int linear_x_{3}, linear_y_{2}, angular_z_{0};
     double lin_x_slow_{0.1}, lin_y_slow_{0.1}, ang_z_slow_{0.1};
     double lin_x_normal_{0.5}, lin_y_normal_{0.5}, ang_z_normal_{0.5};
     double lin_x_fast_{2.0}, lin_y_fast_{2.0}, ang_z_fast_{2.0};
@@ -23,7 +23,7 @@ private:
     ros::Subscriber joy_sub_;
 };
 
-TeleopJoy::TeleopJoy() : linear_x_(1), linear_y_(2), angular_z_(0)
+TeleopJoy::TeleopJoy()
 {
     nh_.param("axis_linear_x", linear_x_, linear_x_);
     nh_.param("axis_linear_y", linear_y_, linear_y_);

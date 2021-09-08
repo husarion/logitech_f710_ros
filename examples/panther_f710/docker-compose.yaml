@@ -1,6 +1,7 @@
 version: '3.4'
 
 services:
+  # ROS Noetic panther driver
   panther_driver:
     image: husarion/panther-driver
     container_name: panther_driver
@@ -10,23 +11,44 @@ services:
       - ROS_MASTER_URI=http://127.0.0.1:11311
     command: roslaunch panther_driver driver.launch
 
+
+  # ROS Noetic velocity manager
   velocity_manager:
-    image: husarion:velocity-manager
+    image: husarion/velocity-manager:noetic-latest
     container_name: velocity_manager
+    tty: true   
     network_mode: host
     restart: on-failure
     environment:
-      - ROS_MASTER_URI=http://127.0.0.1:11311
+      - "ROS_IP=127.0.0.1"
+      - "ROS_MASTER_URI=http://127.0.0.1:11311"
     command: rosrun velocity_manager velocity_manager_node
 
+
+  # ROS Noetic joystick controller
   logitech-f710-joy-ros:
     build:
-      context: .
+      context: ./../../
     container_name: logitech-f710-joy-ros
+    tty: true   
     network_mode: host
     restart: on-failure
     environment:
-      - ROS_MASTER_URI=http://localhost:11311
-    device:
+      - "ROS_IP=127.0.0.1"
+      - "ROS_MASTER_URI=http://127.0.0.1:11311"
+    devices:
       - /dev/input/js0
-    command: rosrun logitech_f710_joy_ros f710_teleop_joy
+    command: roslaunch logitech_f710_joy_ros joy_teleop.launch
+
+
+  # ROS Noetic ROS master
+  ros-master:
+    image: ros:noetic-ros-core
+    tty: true
+    network_mode: host
+    restart: on-failure
+    environment:
+      - "ROS_IP=127.0.0.1"
+      - "ROS_MASTER_URI=http://127.0.0.1:11311"
+    command: stdbuf -o L roscore
+

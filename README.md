@@ -52,7 +52,7 @@ ROS node is translating `/joy` topic to `/cmd_vel` topic.
 
 Following parameters change joystick axes mapped to given robot axes of freedom. For more information about parameter values refer to joy package [wiki page](http://wiki.ros.org/joy#Logitech_Wireless_Gamepad_F710_.28DirectInput_Mode.29).
 
-- `~axis_linear_x` *(int, default: 1)* 
+- `~axis_linear_x` *(int, default: 3)* 
 - `~axis_linear_y` *(int, default: 2)*
 - `~axis_angular_z` *(int, default: 0)*
 

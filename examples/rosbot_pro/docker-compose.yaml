@@ -1,0 +1,52 @@
+version: "2.3"
+
+
+services:
+
+  # ROS Noetic + ROS 2 Foxy
+  bridge:
+    image: ros:foxy-ros1-bridge
+    restart: on-failure
+    environment:
+      - "ROS_IP=bridge"
+      - "ROS_MASTER_URI=http://my-ros-master:11311"    
+    command: ros2 run ros1_bridge dynamic_bridge
+
+
+  # ROS Melodic master
+  my-ros-master:
+    image: ros:melodic-ros-core
+    restart: on-failure
+    tty: true 
+    environment:
+      - "ROS_IP=my-ros-master"
+      - "ROS_MASTER_URI=http://my-ros-master:11311"    
+    command: stdbuf -o L roscore
+
+  
+  # ROS Noetic joystick controller
+  logitech-f710-joy-ros:
+    image: husarion/velocity-manager
+    tty: true
+    environment:
+      - "ROS_IP=logitech-f710-joy-ros"
+      - "ROS_MASTER_URI=http://my-ros-master:11311"
+    restart: on-failure
+    devices:
+      - /dev/input/js0
+    command: roslaunch logitech_f710_joy_ros joy_teleop.launch
+
+
+  # ROS Melodic rosbot hardware layer
+  rosbot:
+    image: husarion/rosbot
+    tty: true      
+    environment:
+      - "ROS_IP=rosbot"
+      - "ROS_MASTER_URI=http://my-ros-master:11311"
+    restart: on-failure
+    environment:
+      - "SERIAL_PORT=/dev/ttyS4" # default: ttyS1 - rosbot2.0; ttyS4 - rosbot2.0 `pro
+    devices:
+      - "/dev/ttyS4"   # must match environment SERIAL_PORT 
+    command: roslaunch rosbot_description rosbot_docker.launch
