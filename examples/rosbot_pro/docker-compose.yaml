@@ -15,7 +15,7 @@ services:
 
   # ROS Noetic joystick controller
   logitech-f710-joy-ros:
-    image: husarion/velocity-manager:noetic-latest
+    image: husarion/logitech-f710:noetic-latest
     tty: true
     environment:
       - "ROS_MASTER_URI=http://my-ros-master:11311"
