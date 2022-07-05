@@ -3,13 +3,11 @@ version: "2.3"
 
 services:
 
-  # ROS Melodic master
+# ROS Melodic master
   my-ros-master:
     image: ros:melodic-ros-core
     restart: on-failure
     tty: true
-    environment:
-      - "ROS_MASTER_URI=http://my-ros-master:11311"
     command: stdbuf -o L roscore
 
 
