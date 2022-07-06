@@ -17,7 +17,15 @@ on:
   
 jobs:
   build_logitech_f710_joy_ros:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ros-distro: melodic
+            platforms: "linux/amd64, linux/arm64, linux/arm/v7"
+          - ros-distro: noetic
+            platforms: "linux/amd64, linux/arm64"
 
     steps:
         
@@ -46,8 +54,10 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
-        platforms: linux/arm64, linux/amd64
+        platforms: =${{ matrix.platforms }}
         push: true
-        tags: husarion/logitech-f710:noetic-latest
-        cache-from: type=registry,ref=husarion/logitech-f710:noetic-latest
+        build-args: |
+          ROS_DISTRO=${{ matrix.ros-distro }}
+        tags: husarion/logitech-f710:=${{ matrix.ros-distro }}
+        cache-from: type=registry,ref=husarion/logitech-f710:=${{ matrix.ros-distro }}
         cache-to: type=inline

@@ -1,6 +1,6 @@
 # Logitech F710 ROS joy teleop
 
-Dockerized ROS node allowing to control robot with Logitech F710 gamepad. More details on ROS node itself and applied velocities in modes can be found in it's [README](./logitech_f710_ros/README.md).
+Dockerized ROS node allowing to control ROS powered mobile robots with Logitech F710 gamepad. More details on ROS node itself and applied velocities in modes can be found in it's [README](./logitech_f710_ros/README.md).
 
 ## Setup joy
 
@@ -8,10 +8,12 @@ Connect joy via nano USB receiver and make sure it is in **DirectInput Mode** (s
 
 To test if joy works use `jstest /dev/input/js0`.
 If the output is:
-        
-        jstest: No such file or directory
 
-See `ls /dev/input | grep js` and find your joy number. If it differs apply changes in *docker-compose.yaml* and launch file.
+```
+jstest: No such file or directory
+```
+
+See `ls /dev/input | grep js` and find your joy number. If it differs apply changes in *compose.*.yaml* and launch file.
 
 ## Button mapping
 
@@ -50,7 +52,7 @@ By default linear `X` and `Y` are held by right stick. Angular `Z` is controlled
 
 3. Launch on ROSbot
 
-    Go to the `/home/husarion/logitech_f710_ros/demo` folder and run:
+    Go to the `logitech_f710_ros/demo` folder and run:
     
     ```bash
     docker compose -f compose.rosbot.yaml up

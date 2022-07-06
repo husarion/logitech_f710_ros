@@ -1,5 +1,3 @@
-version: "2.3"
-
 services:
 
   ros-master:
@@ -8,7 +6,7 @@ services:
     command: stdbuf -o L roscore
 
   logitech-f710-joy-ros:
-    image: husarion/logitech-f710:noetic-latest
+    image: husarion/logitech-f710:noetic
     restart: unless-stopped
     tty: true
     devices:
@@ -20,7 +18,7 @@ services:
       logitech_f710_joy_ros joy_teleop.launch
 
   rosbot:
-    image: husarion/rosbot:melodic-rpi
+    image: husarion/rosbot:melodic
     restart: unless-stopped
     tty: true
     devices:
