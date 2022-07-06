@@ -1,0 +1,33 @@
+version: "2.3"
+
+services:
+
+  ros-master:
+    image: ros:melodic-ros-core
+    restart: unless-stopped
+    command: stdbuf -o L roscore
+
+  logitech-f710-joy-ros:
+    image: husarion/logitech-f710:noetic-latest
+    restart: unless-stopped
+    tty: true
+    devices:
+      - /dev/input/js0
+    environment:
+      - ROS_MASTER_URI=http://ros-master:11311
+    command: >
+      roslaunch --wait 
+      logitech_f710_joy_ros joy_teleop.launch
+
+  rosbot:
+    image: husarion/rosbot:melodic-rpi
+    restart: unless-stopped
+    tty: true
+    devices:
+      - ${SERIAL_PORT}
+    environment:
+      - SERIAL_PORT
+      - ROS_MASTER_URI=http://ros-master:11311
+    command: >
+      roslaunch --wait
+      rosbot_description rosbot_docker.launch
