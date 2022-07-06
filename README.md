@@ -35,7 +35,7 @@ By default linear `X` and `Y` are held by right stick. Angular `Z` is controlled
 
     ```bash
     git clone https://github.com/husarion/logitech_f710_ros.git
-    cd rosbot-docker/
+    cd logitech_f710_ros/
     ```
 
 2. Create `demo/.env` based on `demo/.env.template` file and modify it if needed (see comments)
@@ -50,12 +50,6 @@ By default linear `X` and `Y` are held by right stick. Angular `Z` is controlled
 
 3. Launch on ROSbot
 
-    SSH to ROSbot (assuming your ROSbot IP address is `192.168.8.186`):
-
-    ```bash
-    ssh husarion@192.168.8.186
-    ```
-    
     Go to the `/home/husarion/logitech_f710_ros/demo` folder and run:
     
     ```bash
