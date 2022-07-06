@@ -1,37 +1,33 @@
 version: "2.3"
 
-
 services:
 
-# ROS Melodic master
-  my-ros-master:
+  ros-master:
     image: ros:melodic-ros-core
-    restart: on-failure
-    tty: true
+    restart: unless-stopped
     command: stdbuf -o L roscore
 
-
-  # ROS Noetic joystick controller
   logitech-f710-joy-ros:
     image: husarion/logitech-f710:noetic-latest
+    restart: unless-stopped
     tty: true
-    environment:
-      - "ROS_MASTER_URI=http://my-ros-master:11311"
-    restart: on-failure
     devices:
       - /dev/input/js0
-    command: roslaunch logitech_f710_joy_ros joy_teleop.launch
+    environment:
+      - ROS_MASTER_URI=http://ros-master:11311
+    command: >
+      roslaunch --wait 
+      logitech_f710_joy_ros joy_teleop.launch
 
-
-  # ROS Melodic rosbot hardware layer
   rosbot:
     image: husarion/rosbot:melodic-rpi
+    restart: unless-stopped
     tty: true
-    environment:
-      - "ROS_MASTER_URI=http://my-ros-master:11311"
-    restart: on-failure
-    environment:
-      - "SERIAL_PORT=/dev/ttyAMA0" # default: ttyS1 - rosbot2.0; ttyS4 - rosbot2.0 `pro
     devices:
-      - "/dev/ttyAMA0"   # must match environment SERIAL_PORT
-    command: roslaunch rosbot_description rosbot_docker.launch
+      - /dev/ttyAMA0   # must match environment SERIAL_PORT
+    environment:
+      - SERIAL_PORT=/dev/ttyAMA0 # default: ttyS1 - rosbot2.0; ttyS4 - rosbot2.0 `pro
+      - ROS_MASTER_URI=http://ros-master:11311
+    command: >
+      roslaunch --wait
+      rosbot_description rosbot_docker.launch
