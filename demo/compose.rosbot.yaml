@@ -6,7 +6,7 @@ services:
     command: stdbuf -o L roscore
 
   logitech-f710-joy-ros:
-    image: husarion/logitech-f710:noetic
+    image: husarion/logitech-f710:melodic
     restart: unless-stopped
     tty: true
     devices:
