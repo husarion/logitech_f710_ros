@@ -3,17 +3,8 @@ name: Build/Publish Docker Image
 on:
   push:
     branches:
-      - 'main'
+      - 'ros1'
   workflow_dispatch:
-    inputs:
-      tag:
-        description: 'tag that the image will be built with'
-        required: true
-        default: 'latest'
-      branch:
-        description: 'branch that will be used to build image'
-        required: true
-        default: 'main'
   
 jobs:
   build_logitech_f710_joy_ros:
@@ -30,9 +21,7 @@ jobs:
     steps:
         
     - name: Checkout
-      uses: actions/checkout@v1
-      with:
-        ref: ${{ github.event.inputs.branch }}
+      uses: actions/checkout@v2
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
