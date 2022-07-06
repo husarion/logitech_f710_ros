@@ -29,37 +29,8 @@ To drive robot use sticks.
 
 By default linear `X` and `Y` are held by right stick. Angular `Z` is controlled with left stick.
 
-# Demo
-
-## Controlling ROSbot with gamepad Logitech F710
-
-1. Clone this repo on your ROSbot:
-
-    ```bash
-    git clone https://github.com/husarion/logitech_f710_ros.git
-    cd logitech_f710_ros/
-    ```
-
-2. Create `demo/.env` based on `demo/.env.template` file and modify it if needed (see comments)
-
-    ```bash
-    # SBC <> STM32 serial connection. Set:
-    # /dev/ttyS1 for ROSbot 2
-    # /dev/ttyS4 for ROSbot 2 PRO
-    # /dev/ttyAMA0 for ROSbbot 2R
-    SERIAL_PORT=/dev/ttyAMA0
-    ```
-
-3. Launch on ROSbot
-
-    Go to the `logitech_f710_ros/demo` folder and run:
-    
-    ```bash
-    docker compose -f compose.rosbot.yaml up
-    ```
-
 ---
-# ROS node API
+## ROS node API
 
 ROS node is translating `/joy` topic to `/cmd_vel` topic.
 
@@ -94,3 +65,42 @@ Robot can be operated at 3 scales of speed depending on pressed buttons. Values 
 - `~fast_linear_y` *(double, default: 2.0)*
 - `~fast_angular_z` *(double, default: 2.0)*
 
+## Docker image
+
+[![Build/Publish Docker Image](https://github.com/husarion/logitech_f710_ros/actions/workflows/build-docker-image.yaml/badge.svg)](https://github.com/husarion/logitech_f710_ros/actions/workflows/build-docker-image.yaml)
+
+| ROS distro | Supported architectures |
+| - | - |
+| `melodic` | `linux/amd64`, `linux/arm64`, `linux/arm/v7` |
+| `noetic` | `linux/amd64`, `linux/arm64` |
+
+Available on [Docker Hub](https://hub.docker.com/r/husarion/logitech-f710/tags)
+
+### Demo
+
+#### Controlling ROSbot 2 with a Logitech F710 gamepad
+
+1. Clone this repo on your ROSbot:
+
+    ```bash
+    git clone https://github.com/husarion/logitech_f710_ros.git
+    cd logitech_f710_ros/
+    ```
+
+2. Create `demo/.env` based on `demo/.env.template` file and modify it if needed (see comments)
+
+    ```bash
+    # SBC <> STM32 serial connection. Set:
+    # /dev/ttyS1 for ROSbot 2
+    # /dev/ttyS4 for ROSbot 2 PRO
+    # /dev/ttyAMA0 for ROSbbot 2R
+    SERIAL_PORT=/dev/ttyAMA0
+    ```
+
+3. Launch on ROSbot
+
+    Go to the `logitech_f710_ros/demo` folder and run:
+    
+    ```bash
+    docker compose -f compose.rosbot.yaml up
+    ```
