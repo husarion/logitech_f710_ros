@@ -54,10 +54,10 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
-        platforms: =${{ matrix.platforms }}
+        platforms: ${{ matrix.platforms }}
         push: true
         build-args: |
           ROS_DISTRO=${{ matrix.ros-distro }}
-        tags: husarion/logitech-f710:=${{ matrix.ros-distro }}
-        cache-from: type=registry,ref=husarion/logitech-f710:=${{ matrix.ros-distro }}
+        tags: husarion/logitech-f710:${{ matrix.ros-distro }}
+        cache-from: type=registry,ref=husarion/logitech-f710:${{ matrix.ros-distro }}
         cache-to: type=inline
