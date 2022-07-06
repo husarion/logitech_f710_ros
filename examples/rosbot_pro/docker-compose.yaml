@@ -24,9 +24,9 @@ services:
     restart: unless-stopped
     tty: true
     devices:
-      - /dev/ttyAMA0   # must match environment SERIAL_PORT
+      - ${SERIAL_PORT}
     environment:
-      - SERIAL_PORT=/dev/ttyAMA0 # default: ttyS1 - rosbot2.0; ttyS4 - rosbot2.0 `pro
+      - SERIAL_PORT
       - ROS_MASTER_URI=http://ros-master:11311
     command: >
       roslaunch --wait
