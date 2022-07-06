@@ -27,14 +27,40 @@ To drive robot use sticks.
 
 By default linear `X` and `Y` are held by right stick. Angular `Z` is controlled with left stick.
 
-## Examples
+# Demo
 
-You can run examples with following commands:
+## Controlling ROSbot with gamepad Logitech F710
 
-``` bash
-cd examples/panther_f710
-docker-compose up
-```
+1. Clone this repo on your ROSbot:
+
+    ```bash
+    git clone https://github.com/husarion/logitech_f710_ros.git
+    cd rosbot-docker/
+    ```
+
+2. Create `demo/.env` based on `demo/.env.template` file and modify it if needed (see comments)
+
+    ```bash
+    # SBC <> STM32 serial connection. Set:
+    # /dev/ttyS1 for ROSbot 2
+    # /dev/ttyS4 for ROSbot 2 PRO
+    # /dev/ttyAMA0 for ROSbbot 2R
+    SERIAL_PORT=/dev/ttyAMA0
+    ```
+
+3. Launch on ROSbot
+
+    SSH to ROSbot (assuming your ROSbot IP address is `192.168.8.186`):
+
+    ```bash
+    ssh husarion@192.168.8.186
+    ```
+    
+    Go to the `/home/husarion/logitech_f710_ros/demo` folder and run:
+    
+    ```bash
+    docker compose -f compose.rosbot.yaml up
+    ```
 
 ---
 # ROS node API
