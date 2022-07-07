@@ -28,4 +28,4 @@ services:
       - ROS_MASTER_URI=http://ros-master:11311
     command: >
       roslaunch --wait
-      rosbot_description rosbot_docker.launch
+      rosbot_bringup rosbot_docker.launch
