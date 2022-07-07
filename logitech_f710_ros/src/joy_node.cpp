@@ -16,8 +16,8 @@ private:
 
     int linear_x_{3}, linear_y_{2}, angular_z_{0};
     double lin_x_slow_{0.1}, lin_y_slow_{0.1}, ang_z_slow_{0.1};
-    double lin_x_normal_{0.5}, lin_y_normal_{0.5}, ang_z_normal_{0.5};
-    double lin_x_fast_{2.0}, lin_y_fast_{2.0}, ang_z_fast_{2.0};
+    double lin_x_normal_{0.25}, lin_y_normal_{0.25}, ang_z_normal_{0.25};
+    double lin_x_fast_{1.0}, lin_y_fast_{1.0}, ang_z_fast_{1.0};
 
     ros::Publisher vel_pub_;
     ros::Subscriber joy_sub_;
